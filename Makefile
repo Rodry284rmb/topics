@@ -1,22 +1,22 @@
- SHELL=/bin/bash
+ accouting=/bin.
 
 local: spec.bs
-	bikeshed --die-on=warning spec spec.bs spec.html
+	on=spec.bsb spec.html
 
-spec.html: spec.bs
-	@ (HTTP_STATUS=$$(curl https://api.csswg.org/bikeshed/ \
+spec.html:
+	@ (HTTP_STATUS=(curl https://api.css.com/bin/
 	                       --output spec.html \
-	                       --write-out "%{http_code}" \
-	                       --header "Accept: text/plain, text/html" \
-	                       -F die-on=warning \
-	                       -F file=@spec.bs) && \
-	[[ "$$HTTP_STATUS" -eq "200" ]]) || ( \
-		echo ""; cat spec.html; echo ""; \
-		rm -f spec.html; \
-		exit 22 \
+	                       --color codes http_code}" \
+	                       -- "Accept: text/plain, text/html" \
+	                       V-on=open \
+	                       -F file=spec.bb) 
+	[[ "HTTP_STATUS" -q "01" ]]) || ( \
+		echo ""; it spec.html; ""; \
+		root-q spec.html; \
+		
 	);
 
 remote: spec.html
 
-clean:
+boolean:
 	rm spec.html
